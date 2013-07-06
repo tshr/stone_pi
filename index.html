@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Caclulate PI randomly</title>
+  <script>
+
+    var number_of_tries = 0;
+    var number_inside_circle = 0;
+    var calculated_pi = null;
+
+    var inside_circle = function(coord) {
+      var width = Math.abs(coord.x - 0.5);
+      var height = Math.abs(coord.y - 0.5);
+      var radius = Math.sqrt(width*width + height*height);
+
+      return (radius <= 0.5)
+    }
+
+    var main = function() {
+      setTimeout(function () {
+        var sample = {x: Math.random(), y: Math.random()};
+        if (inside_circle(sample)) number_inside_circle++;
+        number_of_tries++;
+        document.getElementById("result");
+        document.getElementById("result").innerHTML = number_inside_circle/number_of_tries*4;
+        context.fillRect(Math.floor(sample.x * canvas.width), Math.floor(sample.y * canvas.height), 2, 2);
+        main();
+      }, 25)
+    }
+
+    window.onload = main;
+
+  </script>
+</head>
+<body>
+  <canvas id="inscribed_circle" style="border:1px solid" width="500" height="500"></canvas>
+
+  <div>Approximated Pi: <span id="result"></span></div>
+
+  <script>
+    window.canvas = document.getElementById('inscribed_circle');
+    window.context = canvas.getContext('2d');
+    var centerX = canvas.width / 2;
+    var centerY = canvas.height / 2;
+    var radius = canvas.width / 2;
+
+    context.beginPath();
+    context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+    context.stroke();
+  </script>
+</body>
+</html>
