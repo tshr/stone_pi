@@ -1,4 +1,4 @@
 Stone Pi
 ========
 
-Approximating Pi with js and canvass
+Approximating pi with js and canvas
