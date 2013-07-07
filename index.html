@@ -58,7 +58,7 @@
         number_of_tries++;
         document.getElementById("result");
         document.getElementById("result").innerHTML = display_approximation(number_inside_circle/number_of_tries*4);
-        context.fillRect(Math.floor(sample.x * canvas.width), Math.floor(sample.y * canvas.height), 2, 2);
+        context.fillRect(Math.floor(sample.x * canvas.width), Math.floor(sample.y * canvas.height), 1, 1);
         main();
       }, 20)
     }
@@ -80,7 +80,7 @@
     var radius = canvas.width / 2;
 
     context.beginPath();
-    context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+    context.arc(centerX, centerY, radius, 0, 2 * Math.PI);
     context.stroke();
   </script>
 </body>
