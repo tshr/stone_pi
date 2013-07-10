@@ -32,7 +32,6 @@
     var number_inside_circle = 0;
     var calculated_pi = null;
 
-
     var draw_circle = function() {
       window.canvas = document.getElementById('inscribed_circle');
       window.context = canvas.getContext('2d');
@@ -53,8 +52,8 @@
       return (radius <= 0.5)
     }
 
-    var display_approximation = function(value) {
-
+    var get_approximation = function() {
+      var value = (number_inside_circle/number_of_tries) * 4;
       var pi_string = Math.PI.toString();
       var approx_string = value.toString();
       var result = '<span id="completed">';
@@ -72,14 +71,22 @@
       return result;
     }
 
+    var display_approximation = function() {
+        document.getElementById("result");
+        document.getElementById("result").innerHTML = get_approximation();
+    }
+
+    var draw_dot = function(coord) {
+      context.fillRect(Math.floor(coord.x * canvas.width), Math.floor(coord.y * canvas.height), 2, 2);
+    }
+
     var run = function() {
       setTimeout(function () {
         var sample = {x: Math.random(), y: Math.random()};
         if (inside_circle(sample)) number_inside_circle++;
         number_of_tries++;
-        document.getElementById("result");
-        document.getElementById("result").innerHTML = display_approximation(number_inside_circle/number_of_tries*4);
-        context.fillRect(Math.floor(sample.x * canvas.width), Math.floor(sample.y * canvas.height), 2, 2);
+        display_approximation();
+        draw_dot(sample);
         run();
       }, 20)
     }
