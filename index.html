@@ -3,6 +3,7 @@
 <head>
   <title>Approximating Pi with the Stone in Pond Approach</title>
   <link href='http://fonts.googleapis.com/css?family=Cinzel' rel='stylesheet' type='text/css'>
+
   <style>
     :root {
       font-family: 'Cinzel', serif;
@@ -17,12 +18,32 @@
     #result #completed {
       color: #000000;
     }
+
+    #inscribed_circle {
+      border:1px solid;
+      float: left;
+      margin-right: 10px;
+    }
   </style>
+
   <script>
 
     var number_of_tries = 0;
     var number_inside_circle = 0;
     var calculated_pi = null;
+
+
+    var draw_circle = function() {
+      window.canvas = document.getElementById('inscribed_circle');
+      window.context = canvas.getContext('2d');
+      var centerX = canvas.width / 2;
+      var centerY = canvas.height / 2;
+      var radius = canvas.width / 2;
+
+      context.beginPath();
+      context.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+      context.stroke();
+    }
 
     var inside_circle = function(coord) {
       var width = Math.abs(coord.x - 0.5);
@@ -51,7 +72,7 @@
       return result;
     }
 
-    var main = function() {
+    var run = function() {
       setTimeout(function () {
         var sample = {x: Math.random(), y: Math.random()};
         if (inside_circle(sample)) number_inside_circle++;
@@ -59,29 +80,21 @@
         document.getElementById("result");
         document.getElementById("result").innerHTML = display_approximation(number_inside_circle/number_of_tries*4);
         context.fillRect(Math.floor(sample.x * canvas.width), Math.floor(sample.y * canvas.height), 2, 2);
-        main();
+        run();
       }, 20)
     }
 
-    window.onload = main;
+    window.onload = function() {
+      draw_circle();
+      run();
+    }
 
   </script>
 </head>
 <body>
-  <canvas id="inscribed_circle" style="border:1px solid; float: left; margin-right: 10px" width="500" height="500"></canvas>
 
+  <canvas id="inscribed_circle" width="500" height="500"></canvas>
   <span id="result"></span>
 
-  <script>
-    window.canvas = document.getElementById('inscribed_circle');
-    window.context = canvas.getContext('2d');
-    var centerX = canvas.width / 2;
-    var centerY = canvas.height / 2;
-    var radius = canvas.width / 2;
-
-    context.beginPath();
-    context.arc(centerX, centerY, radius, 0, 2 * Math.PI);
-    context.stroke();
-  </script>
 </body>
 </html>
