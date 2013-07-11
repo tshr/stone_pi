@@ -80,20 +80,16 @@
       context.fillRect(Math.floor(coord.x * canvas.width), Math.floor(coord.y * canvas.height), 2, 2);
     }
 
-    var run = function() {
-      setTimeout(function () {
+    window.onload = function() {
+      draw_circle();
+      (function run(){
         var sample = {x: Math.random(), y: Math.random()};
         if (inside_circle(sample)) number_inside_circle++;
         number_of_tries++;
         display_approximation();
         draw_dot(sample);
-        run();
-      }, 20)
-    }
-
-    window.onload = function() {
-      draw_circle();
-      run();
+        setTimeout(run, 20);
+      }())
     }
 
   </script>
