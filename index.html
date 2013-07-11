@@ -31,6 +31,7 @@
     var number_of_tries = 0;
     var number_inside_circle = 0;
     var calculated_pi = null;
+    var pi_string = Math.PI.toString();
 
     var draw_circle = function() {
       window.canvas = document.getElementById('inscribed_circle');
@@ -54,7 +55,6 @@
 
     var get_approximation = function() {
       var value = (number_inside_circle/number_of_tries) * 4;
-      var pi_string = Math.PI.toString();
       var approx_string = value.toString();
       var result = '<span id="completed">';
 
