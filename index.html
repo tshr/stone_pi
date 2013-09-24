@@ -27,38 +27,42 @@
   </style>
 
   <script>
-    var number_of_tries = 0;
-    var number_inside_circle = 0;
-    var pi_string = Math.PI.toString();
+    var number_of_tries = 0,
+        number_inside_circle = 0,
+        pi_string = Math.PI.toString();
 
     var draw_circle = function() {
+
       window.canvas = document.getElementById('inscribed_circle');
       window.context = canvas.getContext('2d');
-      var centerX = canvas.width / 2;
-      var centerY = canvas.height / 2;
-      var radius = canvas.width / 2;
+
+      var centerX = canvas.width / 2,
+          centerY = canvas.height / 2,
+          radius = canvas.width / 2;
 
       context.beginPath();
       context.arc(centerX, centerY, radius, 0, 2 * Math.PI);
       context.stroke();
-    }
+    };
 
     var inside_circle = function(coord) {
-      var width = Math.abs(coord.x - 0.5);
-      var height = Math.abs(coord.y - 0.5);
-      var radius = Math.sqrt(width*width + height*height);
 
-      return (radius <= 0.5)
-    }
+      var width = Math.abs(coord.x - 0.5),
+          height = Math.abs(coord.y - 0.5),
+          radius = Math.sqrt(width * width + height * height);
+
+      return (radius <= 0.5);
+    };
 
     var get_approximation = function() {
-      var value = (number_inside_circle / number_of_tries) * 4;
-      var approx_string = value.toString();
-      var result = '<span id="completed">';
+
+      var value = (number_inside_circle / number_of_tries) * 4,
+          approx_string = value.toString(),
+          result = '<span id="completed">';
 
       for ( var i = 0; i < approx_string.length; i++ ) {
         if (approx_string[i] === pi_string[i]) {
-          result += approx_string[i]
+          result += approx_string[i];
         } else {
           break;
         }
@@ -67,28 +71,33 @@
       result += '</span>';
       result += approx_string.slice(i);
       return result;
-    }
+    };
 
     var display_approximation = function() {
+
       document.getElementById("result");
       document.getElementById("result").innerHTML = get_approximation();
-    }
+    };
 
     var draw_dot = function(coord) {
       context.fillRect(Math.floor(coord.x * canvas.width), Math.floor(coord.y * canvas.height), 2, 2);
-    }
+    };
 
     window.onload = function() {
+
       draw_circle();
+
       (function run() {
+
         var sample = {x: Math.random(), y: Math.random()};
+
         if (inside_circle(sample)) number_inside_circle++;
         number_of_tries++;
         display_approximation();
         draw_dot(sample);
         setTimeout(run, 20);
-      }())
-    }
+      }());
+    };
   </script>
 </head>
 <body>
