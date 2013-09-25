@@ -52,11 +52,11 @@
 
     var inside_circle = function(coord) {
 
-      var width = Math.abs(coord.x - 0.5),
-          height = Math.abs(coord.y - 0.5),
-          radius = Math.sqrt(width * width + height * height);
+      var abs_x = Math.abs(coord.x - 0.5),
+          abs_y = Math.abs(coord.y - 0.5),
+          dist_from_center = Math.sqrt(abs_x * abs_x + abs_y * abs_y);
 
-      return (radius <= 0.5);
+      return (dist_from_center <= 0.5);
     };
 
     var get_approximation = function() {
