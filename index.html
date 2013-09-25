@@ -41,9 +41,9 @@
       window.canvas = document.getElementById('inscribed_circle');
       window.context = canvas.getContext('2d');
 
-      var centerX = canvas.width / 2,
-          centerY = canvas.height / 2,
-          radius = canvas.width / 2;
+      var centerX, radius, centerY;
+      centerX = radius = canvas.width / 2;
+      centerY = canvas.height / 2;
 
       context.beginPath();
       context.arc(centerX, centerY, radius, 0, 2 * Math.PI);
