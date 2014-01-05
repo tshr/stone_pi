@@ -98,10 +98,13 @@
 
         var sample = { 'x' : Math.random(), 'y' : Math.random() };
         var inside = inside_circle(sample);
-        if (inside) number_inside_circle++;
+
         number_of_tries++;
-        display_approximation();
+        if (inside) number_inside_circle++;
         draw_dot(sample, inside);
+
+        display_approximation();
+
         setTimeout(run, 20);
       }());
     };
